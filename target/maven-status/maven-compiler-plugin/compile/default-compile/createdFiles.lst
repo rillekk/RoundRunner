@@ -1,0 +1,9 @@
+net\rillekk\roundrunner\mysql\MySQLRoundRunner.class
+net\rillekk\roundrunner\commands\SetRoundRunnerLocation.class
+net\rillekk\roundrunner\listener\PlayerMoveListener.class
+net\rillekk\roundrunner\mysql\MySQL.class
+net\rillekk\roundrunner\commands\RundenRankingCommand.class
+net\rillekk\roundrunner\commands\RundenCommand.class
+net\rillekk\roundrunner\RoundRunner.class
+net\rillekk\roundrunner\commands\RemoveRoundRunnerLocationCommand.class
+net\rillekk\roundrunner\commands\SetRundenCommand.class

@@ -1,0 +1,10 @@
+name: RoundRunner
+author: Rillekk
+version: 1.0
+main: net.rillekk.roundrunner.RoundRunner
+commands:
+  setroundrunnerlocation:
+  setrunden:
+  removeroundrunnerlocation:
+  runden:
+  rundenranking:
