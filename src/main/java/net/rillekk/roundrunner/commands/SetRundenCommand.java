@@ -26,9 +26,11 @@ import org.bukkit.entity.Player;
 
 public class SetRundenCommand implements CommandExecutor {
     private final RoundRunner plugin;
+
     public SetRundenCommand(RoundRunner plugin) {
         this.plugin = plugin;
     }
+
     private int rounds;
 
     @Override
@@ -39,7 +41,7 @@ public class SetRundenCommand implements CommandExecutor {
                 if (args.length == 2) {
                     OfflinePlayer target = Bukkit.getServer().getOfflinePlayer(args[0]);
                     plugin.getMySQLRoundRunner().userExists(target).thenAccept(check -> {
-                        if(check) {
+                        if (check) {
                             this.rounds = Integer.parseInt(args[1]);
                             plugin.getMySQLRoundRunner().setRounds(target, rounds);
                             player.sendMessage(plugin.getPrefix() + target.getName() + "'s Runden wurden nun auf " + rounds + " gesetzt.");
@@ -51,6 +53,6 @@ public class SetRundenCommand implements CommandExecutor {
             } else
                 player.sendMessage(plugin.getPrefix() + "§cDazu hast du keine Rechte!");
         }
-            return false;
+        return false;
     }
 }

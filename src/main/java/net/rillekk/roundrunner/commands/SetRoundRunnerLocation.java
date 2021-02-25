@@ -27,9 +27,11 @@ import org.bukkit.entity.Player;
 
 public class SetRoundRunnerLocation implements CommandExecutor {
     private final RoundRunner plugin;
+
     public SetRoundRunnerLocation(RoundRunner plugin) {
         this.plugin = plugin;
     }
+
     private String[] controlVariable;
 
 

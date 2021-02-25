@@ -55,7 +55,7 @@ public class RundenCommand implements CommandExecutor {
                 } else if (args.length == 1) {
                     OfflinePlayer offlinePlayer = Bukkit.getServer().getOfflinePlayer(args[0]);
                     plugin.getMySQLRoundRunner().userExists(offlinePlayer).thenAccept(check -> {
-                        if(check) {
+                        if (check) {
                             plugin.getMySQLRoundRunner().getRounds(offlinePlayer).thenAccept(rounds -> plugin.getMySQLRoundRunner().getRank(offlinePlayer).thenAccept(rank -> {
                                 player.sendMessage(plugin.getPrefix() + "✬ §m-------------------§f§7 ✬");
                                 player.sendMessage(plugin.getPrefix() + "                          ");
@@ -70,7 +70,8 @@ public class RundenCommand implements CommandExecutor {
                         } else {
                             plugin.getTimeout().put(player, 8);
                             player.sendMessage(plugin.getPrefix() + "Dieser Spieler ist noch nie eine Runde gelaufen.");
-                        }});
+                        }
+                    });
                 }
             } else
                 player.sendMessage(plugin.getPrefix() + "Bitte warte einen Moment.");

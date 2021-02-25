@@ -48,7 +48,7 @@ public class MySQLRoundRunner {
         return CompletableFuture.supplyAsync(() -> {
                     try {
                         ResultSet rs = plugin.getMySQL().query("SELECT Rounds FROM RoundRunnerRounds WHERE UUID = '" + player.getUniqueId().toString() + "'");
-                        if(rs.next())
+                        if (rs.next())
                             return rs.getInt("Rounds");
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -61,7 +61,7 @@ public class MySQLRoundRunner {
 
     public void setRounds(Player player, int rounds) {
         plugin.getCachedThreadExecutor().execute(() -> userExists(player).thenAccept(check -> {
-            if(check) {
+            if (check) {
                 plugin.getMySQL().update("UPDATE RoundRunnerRounds SET PlayerName = '" + player.getName() + "', Rounds = '" + rounds + "' WHERE UUID = '" + player.getUniqueId().toString() + "'");
             } else {
                 plugin.getMySQL().update("INSERT INTO RoundRunnerRounds (UUID, PlayerName, Rounds) VALUES ('" + player.getUniqueId().toString() + "', '" + player.getName() + "', '" + rounds + "')");
@@ -135,7 +135,7 @@ public class MySQLRoundRunner {
         });
     }
 
-    public CompletableFuture<Boolean> userExists(OfflinePlayer offlinePlayer){
+    public CompletableFuture<Boolean> userExists(OfflinePlayer offlinePlayer) {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 ResultSet rs = plugin.getMySQL().query("SELECT UUID FROM RoundRunnerRounds WHERE UUID = '" + offlinePlayer.getUniqueId().toString() + "'");
@@ -151,7 +151,7 @@ public class MySQLRoundRunner {
         return CompletableFuture.supplyAsync(() -> {
                     try {
                         ResultSet rs = plugin.getMySQL().query("SELECT Rounds FROM RoundRunnerRounds WHERE UUID = '" + offlinePlayer.getUniqueId().toString() + "'");
-                        if(rs.next())
+                        if (rs.next())
                             return rs.getInt("Rounds");
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -163,7 +163,7 @@ public class MySQLRoundRunner {
 
     public void setRounds(OfflinePlayer offlinePlayer, int rounds) {
         plugin.getCachedThreadExecutor().execute(() -> userExists(offlinePlayer).thenAccept(check -> {
-            if(check) {
+            if (check) {
                 plugin.getMySQL().update("UPDATE RoundRunnerRounds SET PlayerName = '" + offlinePlayer.getName() + "', Rounds = '" + rounds + "' WHERE UUID = '" + offlinePlayer.getUniqueId().toString() + "'");
             } else {
                 plugin.getMySQL().update("INSERT INTO RoundRunnerRounds (UUID, PlayerName, Rounds) VALUES ('" + offlinePlayer.getUniqueId().toString() + "', '" + offlinePlayer.getName() + "', '" + rounds + "')");

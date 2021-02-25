@@ -28,6 +28,7 @@ import org.yaml.snakeyaml.error.YAMLException;
 
 public class RemoveRoundRunnerLocationCommand implements CommandExecutor {
     private final RoundRunner plugin;
+
     public RemoveRoundRunnerLocationCommand(RoundRunner plugin) {
         this.plugin = plugin;
     }
@@ -38,8 +39,8 @@ public class RemoveRoundRunnerLocationCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.hasPermission("roundrunner.removeroundrunnerlocation")) {
-                if(args.length == 0) {
-                    for(String key : plugin.getLocationFileConfiguration().getKeys(false)) {
+                if (args.length == 0) {
+                    for (String key : plugin.getLocationFileConfiguration().getKeys(false)) {
                         plugin.getLocationFileConfiguration().set(key, null);
                     }
                     plugin.getLocationFileConfiguration().save(plugin.getLocationFile());

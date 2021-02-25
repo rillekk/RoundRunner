@@ -74,22 +74,22 @@ public class PlayerMoveListener implements Listener {
                                     } else if (i >= controlVariable.length) {
                                         plugin.getMySQLRoundRunner().getRounds(player).thenAccept(oldRounds -> {
                                             plugin.getMySQLRoundRunner().setRounds(player, oldRounds + 1);
-                                                if(controlCoins.get(player) == 1) {
-                                                    CoinsManagerProvider.get().getCoinsUser(player.getUniqueId()).thenAccept(coinsUser -> {
-                                                        coinsUser.addCoins(1L);
-                                                        CoinsManagerProvider.get().saveCoinsUser(coinsUser);
-                                                        player.sendTitle("§6Runde", "§6" + (oldRounds + 1));
-                                                        player.playEffect(player.getLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
-                                                        plugin.getRoundChecker().put(player, 1);
-                                                        controlCoins.put(player, 5);
-                                                    });
-                                                } else {
+                                            if (controlCoins.get(player) == 1) {
+                                                CoinsManagerProvider.get().getCoinsUser(player.getUniqueId()).thenAccept(coinsUser -> {
+                                                    coinsUser.addCoins(1L);
+                                                    CoinsManagerProvider.get().saveCoinsUser(coinsUser);
                                                     player.sendTitle("§6Runde", "§6" + (oldRounds + 1));
-                                                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 3);
+                                                    player.playEffect(player.getLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
                                                     plugin.getRoundChecker().put(player, 1);
-                                                    controlCoins.put(player, (controlCoins.get(player) - 1));
-                                                }
-                                            });
+                                                    controlCoins.put(player, 5);
+                                                });
+                                            } else {
+                                                player.sendTitle("§6Runde", "§6" + (oldRounds + 1));
+                                                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 3);
+                                                plugin.getRoundChecker().put(player, 1);
+                                                controlCoins.put(player, (controlCoins.get(player) - 1));
+                                            }
+                                        });
                                     } else {
                                         plugin.getRoundChecker().put(player, plugin.getRoundChecker().get(player) + 1);
                                     }

@@ -38,8 +38,7 @@ import java.util.concurrent.Executors;
 
 @Getter
 @Setter
-public class RoundRunner extends JavaPlugin
-{
+public class RoundRunner extends JavaPlugin {
     private static RoundRunner INSTANCE;
 
     private File mysqlFile;
@@ -56,8 +55,7 @@ public class RoundRunner extends JavaPlugin
 
     @SneakyThrows
     @Override
-    public void onEnable()
-    {
+    public void onEnable() {
         INSTANCE = this;
 
         this.prefix = "§8» §6OhneLimit §8× §7";
@@ -67,12 +65,12 @@ public class RoundRunner extends JavaPlugin
         this.locationFileConfiguration = YamlConfiguration.loadConfiguration(locationFile);
         this.roundChecker = new HashMap<>();
         this.setMySQL();
-        this.mySQL = new MySQL( getMysqlFileConfiguration().getString("Host"),
-                                getMysqlFileConfiguration().getString("Port"),
-                                getMysqlFileConfiguration().getString("Database"),
-                                getMysqlFileConfiguration().getString("Username"),
-                                getMysqlFileConfiguration().getString("Password"),
-                                this );
+        this.mySQL = new MySQL(getMysqlFileConfiguration().getString("Host"),
+                getMysqlFileConfiguration().getString("Port"),
+                getMysqlFileConfiguration().getString("Database"),
+                getMysqlFileConfiguration().getString("Username"),
+                getMysqlFileConfiguration().getString("Password"),
+                this);
         this.mySQLRoundRunner = new MySQLRoundRunner(this);
         this.timeout = new HashMap<>();
         this.cachedThreadExecutor = Executors.newCachedThreadPool();
@@ -88,8 +86,7 @@ public class RoundRunner extends JavaPlugin
         this.startTimeoutScheduler();
     }
 
-    public void setMySQL() throws IOException
-    {
+    public void setMySQL() throws IOException {
         if (!getMysqlFileConfiguration().contains("Host"))
             getMysqlFileConfiguration().set("Host", "localhost");
 
@@ -108,17 +105,15 @@ public class RoundRunner extends JavaPlugin
         getMysqlFileConfiguration().save(mysqlFile);
     }
 
-    private void startTimeoutScheduler()
-    {
+    private void startTimeoutScheduler() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () ->
         {
-            for(Map.Entry<Player, Integer> entry : timeout.entrySet())
-            {
-                if(entry.getValue() == 0)
+            for (Map.Entry<Player, Integer> entry : timeout.entrySet()) {
+                if (entry.getValue() == 0)
                     timeout.remove(entry.getKey());
                 else
                     timeout.put(entry.getKey(), entry.getValue() - 1);
             }
-        },0, 5);
+        }, 0, 5);
     }
 }

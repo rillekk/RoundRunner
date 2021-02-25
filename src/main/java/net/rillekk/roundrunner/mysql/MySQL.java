@@ -21,8 +21,7 @@ import java.sql.*;
  ***************************************************************/
 
 @Getter
-public class MySQL
-{
+public class MySQL {
     private final RoundRunner plugin;
 
     private final String HOST;
@@ -33,8 +32,7 @@ public class MySQL
 
     private Connection con;
 
-    public MySQL(String host, String port, String database, String user, String password, RoundRunner plugin)
-    {
+    public MySQL(String host, String port, String database, String user, String password, RoundRunner plugin) {
         this.HOST = host;
         this.PORT = port;
         this.DATABASE = database;
@@ -46,57 +44,44 @@ public class MySQL
         connect();
     }
 
-    private void connect()
-    {
+    private void connect() {
         try {
             this.con = DriverManager.getConnection("jdbc:mysql://" + this.HOST + ":" + this.PORT + "/" + this.DATABASE + "?autoReconnect=true", this.USER, this.PASSWORD);
             plugin.getLogger().info("Die Verbindung zur MySQL wurde hergestellt!");
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             plugin.getLogger().info("Die Verbindung zur MySQL ist fehlgeschlagen! Fehler: " + e.getMessage());
         }
     }
 
-    public void close()
-    {
-        try
-        {
-            if (this.con != null)
-            {
+    public void close() {
+        try {
+            if (this.con != null) {
                 this.con.close();
                 plugin.getLogger().info(plugin.getPrefix() + "Die Verbindung zur MySQL wurde Erfolgreich beendet!");
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             plugin.getLogger().info(plugin.getPrefix() + "Fehler beim beenden der Verbindung zur MySQL! Fehler: " + e.getMessage());
         }
     }
 
-    public void update(String qry)
-    {
-        try (Statement st = this.con.createStatement())
-        {
+    public void update(String qry) {
+        try (Statement st = this.con.createStatement()) {
             st.executeUpdate(qry);
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.err.println(e);
         }
     }
 
-    public ResultSet query(String qry)
-    {
+    public ResultSet query(String qry) {
         ResultSet rs = null;
-        try
-        {
+        try {
             Statement st = this.con.createStatement();
             rs = st.executeQuery(qry);
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.err.println(e);
         }
         return rs;
     }
-
 
 
     public Connection getCon() {
